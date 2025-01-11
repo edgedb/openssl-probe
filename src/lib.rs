@@ -49,6 +49,7 @@ fn cert_dirs_iter() -> impl Iterator<Item = &'static Path> {
 ///
 /// Preconfigured values in the environment variables will not be overwritten if the paths they
 /// point to exist and are accessible.
+#[cfg(unsafe_set)]
 pub fn init_ssl_cert_env_vars() {
     try_init_ssl_cert_env_vars();
 }
@@ -62,6 +63,7 @@ pub fn init_ssl_cert_env_vars() {
 /// Returns `true` if any certificate file or directory was found while probing.
 /// Combine this with `has_ssl_cert_env_vars()` to check whether previously configured environment
 /// variables are valid.
+#[cfg(unsafe_set)]
 pub fn try_init_ssl_cert_env_vars() -> bool {
     let ProbeResult { cert_file, cert_dir } = probe();
     // we won't be overwriting existing env variables because if they're valid probe() will have
